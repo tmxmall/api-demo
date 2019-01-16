@@ -15,33 +15,33 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 /**
- * ��������API�����demo
+ * 机器翻译API接入的demo
  *
  */
 public class MtDemo {
 	private static Logger logger = Logger.getLogger(MtDemo.class);
 	public static void main(String[] args) {
 		
-		//�û�ClientId��֤�ӿ�
+		//用户ClientId验证接口
 		String testCidUrl = "";
 		testClientId(testCidUrl);
-		// ���û�������ӿڵ�ַ
+		//设置机器引擎接口地址
 		String setmturl = "";
 		setMtProvider(setmturl);
-		//����ӿڵ�ַ
+		//翻译接口地址
 		String mtTransUrl = "";
 		mtTranslate(mtTransUrl);
 		
 	}
 	
 	/**
-	 * �����û�ClientId��֤�ӿ�
+	 * 调用用户ClientId验证接口
 	 * @param url
 	 */
 	public static void testClientId(String url) {
-		// params���ڴ洢Ҫ����Ĳ���
+		// params用于存储要请求的参数
 		Map<String, String> params = new HashMap<String, String>();
-		// ���ӿ�Ҫ�󴫵ݲ���
+		//按接口要求传递参数
 		params.put("user_name", "");
 		params.put("client_id", "");
 		params.put("de", "");
@@ -50,13 +50,13 @@ public class MtDemo {
 	}
 	
 	/**
-	 * ���÷���ӿ�
+	 *调用翻译接口
 	 * @param url
 	 */
 	public static void mtTranslate(String url) {
-		// params���ڴ洢Ҫ����Ĳ���
+		//params用于存储要请求的参数
 		Map<String, String> params = new HashMap<String, String>();
-		// ���ӿ�Ҫ�󴫵ݲ���
+		//按接口要求传递参数
 		params.put("user_name", "");
 		params.put("client_id", "");
 		params.put("de", "");
@@ -64,60 +64,60 @@ public class MtDemo {
 		params.put("from", "");
 		params.put("to", "");
 		String result = urlConnection(url, params);
-		logger.info("---���÷���ӿ�---"+result);
+		logger.info("---调用翻译接口---"+result);
 		
 	}
 
 	/**
-	 * ���û�������ӿ�
+	 * 调用机器引擎接口
 	 * @param url
 	 */
 	public static void setMtProvider(String url) {
-		// params���ڴ洢Ҫ����Ĳ���
+		//params用于存储要请求的参数
 		Map<String, String> params = new HashMap<String, String>();
-		// ���ӿ�Ҫ�󴫵ݲ������û�Tmxmall�����˺ţ��û�clientId�����÷���ѡ������棬���򣨷Ǳ��
+		// 按接口要求传递参数：用户Tmxmall邮箱账号，用户clientId，调用方，选择的引擎，领域（非必填）
 		params.put("user_name", "");
 		params.put("client_id", "");
 		params.put("de", "");
 		params.put("mt_provider", "");
 		params.put("mt_filed", "");
 		String result = urlConnection(url, params);
-		logger.info("---���û�������ӿ�---"+result);
+		logger.info("---调用机器引擎接口---"+result);
 	}
 	
 	/**
-	 *��Ҫ���������ַ���������������
+	 *主要用于请求地址，并加上请求参数
 	 * @param requestUrl
 	 * @param params
 	 * @return
 	 */
 	public static String urlConnection(String requestUrl, Map<String,String> params) {
-		// buffer���ڽ��ܷ��ص��ַ�
+		// buffer用于接受返回的字符
 		StringBuffer buffer = new StringBuffer();
 		try {
 			URL url = new URL(requestUrl + "?" + paramsFilter(params));
-			//��http����
+			//打开http连接
             HttpURLConnection httpUrlConn = (HttpURLConnection) url.openConnection();
-            //���ݲ�����Ҫ��������
+            //传递参数需要开启输入
 			httpUrlConn.setDoInput(true);
-			//�ύ��ʽ
+			//提交方式
 			httpUrlConn.setRequestMethod("GET");
 			httpUrlConn.connect();
 			InputStream inputStream = httpUrlConn.getInputStream();
 			InputStreamReader inputStreamReader = new InputStreamReader(inputStream,"utf-8");
-			//����һ���ַ�������
+			//构造一个字符流缓存
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-			//��bufferReader��ֵ���ŵ�buffer��
+			//将bufferReader的值给放到buffer里
             String str = null;  
             while ((str = bufferedReader.readLine()) != null) {  
                 buffer.append(str);  
             }  
-            //����
+            //关流
             bufferedReader.close();  
             inputStreamReader.close();  
             inputStream.close();  
             inputStream = null; 
-            //�Ͽ�����
+            //断开连接
             httpUrlConn.disconnect();
 			
 		}catch (MalformedURLException e) {
@@ -129,7 +129,7 @@ public class MtDemo {
 	}
 
 	/**
-	 * ��map��Ĳ�������� user_name=###&client_id=###������
+	 * 将map里的参数变成像 user_name=###&client_id=###的样子
 	 * 
 	 * @param params
 	 * @return
@@ -139,7 +139,7 @@ public class MtDemo {
 		StringBuffer buffer = new StringBuffer();
 		params.forEach((k, v) -> {
 			try {
-				//�Բ����е����Ľ��д���
+				//对参数中的中文进行处理
 				buffer.append(k).append("=").append(URLEncoder.encode(v+"","UTF-8")).append("&");
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
