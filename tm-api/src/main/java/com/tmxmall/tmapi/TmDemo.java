@@ -14,8 +14,10 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.tmxmall.tmapi.constants.TmApiUrlConstant;
+
 /**
- * ·­Òë¼ÇÒäAPI½ÓÈëµÄdemo
+ * ç¿»è¯‘è®°å¿†APIæ¥å…¥çš„demo
  *
  */
 public class TmDemo {
@@ -24,41 +26,41 @@ public class TmDemo {
 	
 	public static void main(String[] args) {
 		
-		//ÓÃ»§ClientIdÑéÖ¤½Ó¿Ú
-		String testCidUrl = "";
+		//ç”¨æˆ·ClientIdéªŒè¯æ¥å£
+		String testCidUrl = TmApiUrlConstant.CLIENTID_VERIFY;
 		testClientId(testCidUrl);
-		//²éÑ¯·­Òë¼ÇÒä½Ó¿ÚµØÖ·
-		String setmturl = "";
-		searchTm(setmturl);
-		// Ğ´Èë½Ó¿ÚµØÖ·
-		String mtTransUrl = "";
-		writeTm(mtTransUrl);
+		//æŸ¥è¯¢ç¿»è¯‘è®°å¿†æ¥å£åœ°å€
+		String transTmUrl = TmApiUrlConstant.TRANSLATE_TM;
+		searchTm(transTmUrl);
+		// å†™å…¥æ¥å£åœ°å€
+		String setTmUrl = TmApiUrlConstant.SET_TM;
+		writeTm(setTmUrl);
 	}
 	
 	/**
-	 * µ÷ÓÃÓÃ»§ClientIdÑéÖ¤½Ó¿Ú
+	 * è°ƒç”¨ç”¨æˆ·ClientIdéªŒè¯æ¥å£
 	 * @param url
 	 */
 	public static void testClientId(String url) {
-		// paramsÓÃÓÚ´æ´¢ÒªÇëÇóµÄ²ÎÊı
+		// paramsç”¨äºå­˜å‚¨è¦è¯·æ±‚çš„å‚æ•°
 		Map<String, String> params = new HashMap<String, String>();
-		// °´½Ó¿ÚÒªÇó´«µİ²ÎÊı
+		// æŒ‰æ¥å£è¦æ±‚ä¼ é€’å‚æ•°
 		params.put("user_name", "");
 		params.put("client_id", "");
 		params.put("de", "");
 		String result = urlConnection(url, params);
-		logger.info("---µ÷ÓÃÓÃ»§ClientIdÑéÖ¤½Ó¿Ú---"+result);
+		logger.info("---è°ƒç”¨ç”¨æˆ·ClientIdéªŒè¯æ¥å£---"+result);
 	}
 
 	/**
-	 * µ÷ÓÃ²éÑ¯·­Òë¼ÇÒä½Ó¿Ú
+	 * è°ƒç”¨æŸ¥è¯¢ç¿»è¯‘è®°å¿†æ¥å£
 	 * 
 	 * @param url
 	 */
 	public static void searchTm(String url) {
-		// paramsÓÃÓÚ´æ´¢ÒªÇëÇóµÄ²ÎÊı
+		// paramsç”¨äºå­˜å‚¨è¦è¯·æ±‚çš„å‚æ•°
 		Map<String, String> params = new HashMap<String, String>();
-		// ½Ó¿ÚÒªÇó´«µİ²ÎÊı
+		// æ¥å£è¦æ±‚ä¼ é€’å‚æ•°
 		params.put("user_name", "");
 		params.put("client_id", "");
 		params.put("de", "");
@@ -67,18 +69,18 @@ public class TmDemo {
 		params.put("tu_num", "");
 		params.put("gls_num", "");
 		String result = urlConnection(url, params);
-		logger.info("---µ÷ÓÃ²éÑ¯·­Òë¼ÇÒä½Ó¿Ú---"+result);
+		logger.info("---è°ƒç”¨æŸ¥è¯¢ç¿»è¯‘è®°å¿†æ¥å£---"+result);
 	}
 
 	/**
-	 * µ÷ÓÃĞ´Èë·­Òë¼ÇÒä½Ó¿Ú
+	 * è°ƒç”¨å†™å…¥ç¿»è¯‘è®°å¿†æ¥å£
 	 * 
 	 * @param url
 	 */
 	public static void writeTm(String url) {
-		// paramsÓÃÓÚ´æ´¢ÒªÇëÇóµÄ²ÎÊı
+		// paramsç”¨äºå­˜å‚¨è¦è¯·æ±‚çš„å‚æ•°
 		Map<String, String> params = new HashMap<String, String>();
-		// ½Ó¿ÚÒªÇó´«µİ²ÎÊı£ºÓÃ»§TmxmallÓÊÏäÕËºÅ£¬ÓÃ»§clientId£¬µ÷ÓÃ·½£¬Ñ¡ÔñµÄÒıÇæ£¬ÁìÓò£¨·Ç±ØÌî£©
+		// æ¥å£è¦æ±‚ä¼ é€’å‚æ•°ï¼šç”¨æˆ·Tmxmallé‚®ç®±è´¦å·ï¼Œç”¨æˆ·clientIdï¼Œè°ƒç”¨æ–¹ï¼Œé€‰æ‹©çš„å¼•æ“ï¼Œé¢†åŸŸï¼ˆéå¿…å¡«ï¼‰
 		params.put("user_name", "");
 		params.put("client_id", "");
 		params.put("seg", "");
@@ -88,43 +90,43 @@ public class TmDemo {
 		params.put("from", "");
 		params.put("to", "");
 		String result = urlConnection(url, params);
-		logger.info("---µ÷ÓÃĞ´Èë·­Òë¼ÇÒä½Ó¿Ú---"+result);
+		logger.info("---è°ƒç”¨å†™å…¥ç¿»è¯‘è®°å¿†æ¥å£---"+result);
 	}
 
 	/**
-	 * Ö÷ÒªÓÃÓÚÇëÇóµØÖ·£¬²¢¼ÓÉÏÇëÇó²ÎÊı
+	 * ä¸»è¦ç”¨äºè¯·æ±‚åœ°å€ï¼Œå¹¶åŠ ä¸Šè¯·æ±‚å‚æ•°
 	 * 
 	 * @param requestUrl
 	 * @param params
 	 * @return
 	 */
 	public static String urlConnection(String requestUrl, Map<String,String> params) {
-		// bufferÓÃÓÚ½ÓÊÜ·µ»ØµÄ×Ö·û
+		// bufferç”¨äºæ¥å—è¿”å›çš„å­—ç¬¦
 		StringBuffer buffer = new StringBuffer();
 		try {
 			URL url = new URL(requestUrl + "?" + paramsFilter(params));
-			// ´ò¿ªhttpÁ¬½Ó
+			// æ‰“å¼€httpè¿æ¥
 			HttpURLConnection httpUrlConn = (HttpURLConnection) url.openConnection();
-			// ´«µİ²ÎÊıĞèÒª¿ªÆôÊäÈë
+			// ä¼ é€’å‚æ•°éœ€è¦å¼€å¯è¾“å…¥
 			httpUrlConn.setDoInput(true);
-			// Ìá½»·½Ê½
+			// æäº¤æ–¹å¼
 			httpUrlConn.setRequestMethod("GET");
 			httpUrlConn.connect();
 			InputStream inputStream = httpUrlConn.getInputStream();
 			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
-			// ¹¹ÔìÒ»¸ö×Ö·ûÁ÷»º´æ
+			// æ„é€ ä¸€ä¸ªå­—ç¬¦æµç¼“å­˜
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-			// ½«bufferReaderµÄÖµ¸ø·Åµ½bufferÀï
+			// å°†bufferReaderçš„å€¼ç»™æ”¾åˆ°bufferé‡Œ
 			String str = null;
 			while ((str = bufferedReader.readLine()) != null) {
 				buffer.append(str);
 			}
-			// ¹ØÁ÷
+			// å…³æµ
 			bufferedReader.close();
 			inputStreamReader.close();
 			inputStream.close();
 			inputStream = null;
-			// ¶Ï¿ªÁ¬½Ó
+			// æ–­å¼€è¿æ¥
 			httpUrlConn.disconnect();
 
 		} catch (MalformedURLException e) {
@@ -136,7 +138,7 @@ public class TmDemo {
 	}
 
 	/**
-	 * ½«mapÀïµÄ²ÎÊı±ä³ÉÏñ user_name=###&client_id=###µÄÑù×Ó
+	 * å°†mapé‡Œçš„å‚æ•°å˜æˆåƒ user_name=###&client_id=###çš„æ ·å­
 	 * 
 	 * @param params
 	 * @return
@@ -146,7 +148,7 @@ public class TmDemo {
 		StringBuffer buffer = new StringBuffer();
 		params.forEach((k, v) -> {
 			try {
-				// ¶Ô²ÎÊıÖĞµÄÖĞÎÄ½øĞĞ´¦Àí
+				// å¯¹å‚æ•°ä¸­çš„ä¸­æ–‡è¿›è¡Œå¤„ç†
 				buffer.append(k).append("=").append(URLEncoder.encode(v + "", "UTF-8")).append("&");
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
