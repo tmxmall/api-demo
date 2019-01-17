@@ -14,6 +14,8 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.tmxmall.mtapi.constants.MtApiUrlConstant;
+
 /**
  * 机器翻译API接入的demo
  *
@@ -23,13 +25,13 @@ public class MtDemo {
 	public static void main(String[] args) {
 		
 		//用户ClientId验证接口
-		String testCidUrl = "";
+		String testCidUrl = MtApiUrlConstant.CLIENTID_VERIFY;
 		testClientId(testCidUrl);
 		//设置机器引擎接口地址
-		String setmturl = "";
+		String setmturl = MtApiUrlConstant.SET_MTPROVIDER;
 		setMtProvider(setmturl);
 		//翻译接口地址
-		String mtTransUrl = "";
+		String mtTransUrl = MtApiUrlConstant.MT_TRANSLATE;
 		mtTranslate(mtTransUrl);
 		
 	}
@@ -46,7 +48,7 @@ public class MtDemo {
 		params.put("client_id", "");
 		params.put("de", "");
 		String result = urlConnection(url, params);
-		logger.info("---�����û�ClientId��֤�ӿ�---"+result);
+		logger.info("---调用用户ClientId验证接口---"+result);
 	}
 	
 	/**
