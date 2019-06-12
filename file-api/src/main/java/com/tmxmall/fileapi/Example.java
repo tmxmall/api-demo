@@ -26,7 +26,7 @@ public class Example {
         String de = "";
 
         Map<String, Object> parseResult = parseFile(file.getAbsolutePath(), userName, clientId, from, to, de);
-        if("0" != parseResult.get("errCode")){
+        if(!"0".equals(String.valueOf(parseResult.get("errCode")))){
             throw new RuntimeException((String) parseResult.get("errMsg"));
         }
         String docId = (String) parseResult.get("docId");
@@ -37,7 +37,7 @@ public class Example {
         if(inputStream == null){
             throw new RuntimeException("文件下载失败！");
         }
-            String downloadFilePath = "";          // 下载文件的路径
+        String downloadFilePath = "";          // 下载文件的路径
 
         FileUtil.inputStreamToFile(inputStream, downloadFilePath);
     }
