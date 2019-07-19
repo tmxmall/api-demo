@@ -3,6 +3,7 @@ package com.tmxmall.fileapi;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.tmxmall.fileapi.constants.FileApiUrlConstant;
 import com.tmxmall.fileapi.model.SimpleSegment;
+import com.tmxmall.fileapi.trans.SegmentTranslator;
 import com.tmxmall.fileapi.utils.FileUtil;
 import com.tmxmall.fileapi.utils.HttpClientUtil;
 import com.tmxmall.fileapi.utils.JacksonUtil;
@@ -32,6 +33,9 @@ public class Example {
         String docId = (String) parseResult.get("docId");
         String jsonSegments = JacksonUtil.toJSon(parseResult.get("segments"));
         List<SimpleSegment> segments = JacksonUtil.readValue(jsonSegments, new TypeReference<List<SimpleSegment>>(){});
+
+        // TODO 可以调用机器翻译，或者调用记忆库进行翻译
+        segments = new SegmentTranslator(segments, (sentence) -> "测试文本").trans();
 
         InputStream inputStream = exportFile(userName, clientId, docId, segments);
         if(inputStream == null){
