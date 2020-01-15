@@ -6,13 +6,16 @@ import java.util.Objects;
 public class Atom implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String atomId;
+    // ==== Code 和 Text 共有的属性 =====
+    private String atomId;  // 从 0 开始数
     private String data;
-    private String textStyle;
+    private String textStyle; //类别  regular  tag
 
-    private boolean isHidden = false;
-    private String tagType;
-    private Integer tagId;
+    // ===== Code 专属属性 =====
+    private boolean isHidden = false; //是否省略
+    private String tagType;  //TAG的类型  OPENING | CLOSING | PLACEHOLDER | VIRTUAL_OPENING | VIRTUAL_CLOSING
+    private String tagId;
+    private boolean isCustom = false;// 是否是自定义
 
     public Atom(){
 
@@ -58,12 +61,20 @@ public class Atom implements Serializable {
         this.tagType = tagType;
     }
 
-    public Integer getTagId() {
+    public String getTagId() {
         return tagId;
     }
 
-    public void setTagId(Integer tagId) {
+    public void setTagId(String tagId) {
         this.tagId = tagId;
+    }
+
+    public boolean isCustom() {
+        return isCustom;
+    }
+
+    public void setCustom(boolean custom) {
+        isCustom = custom;
     }
 
     @Override
@@ -74,7 +85,8 @@ public class Atom implements Serializable {
                 ", textStyle='" + textStyle + '\'' +
                 ", isHidden=" + isHidden +
                 ", tagType='" + tagType + '\'' +
-                ", tagId=" + tagId +
+                ", tagId='" + tagId + '\'' +
+                ", isCustom=" + isCustom +
                 '}';
     }
 
@@ -84,6 +96,7 @@ public class Atom implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Atom atom = (Atom) o;
         return isHidden == atom.isHidden &&
+                isCustom == atom.isCustom &&
                 Objects.equals(atomId, atom.atomId) &&
                 Objects.equals(data, atom.data) &&
                 Objects.equals(textStyle, atom.textStyle) &&
@@ -93,7 +106,7 @@ public class Atom implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(atomId, data, textStyle, isHidden, tagType, tagId);
+        return Objects.hash(atomId, data, textStyle, isHidden, tagType, tagId, isCustom);
     }
 }
 
