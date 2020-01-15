@@ -91,6 +91,7 @@ API**价格**
 |isHidden|boolean|是否隐藏|
 |tagType|String	|Tag的类型 OPENING , CLOSING , PLACEHOLDER , VIRTUAL_OPENING ,VIRTUAL_CLOSING|
 |tagId	|int|Tag编号|
+|isCustom	|boolean|是否是自定义|
 
 **语言列表**
 
