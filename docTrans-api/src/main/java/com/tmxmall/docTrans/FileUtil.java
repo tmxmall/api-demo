@@ -21,6 +21,7 @@ public class FileUtil {
         while ((byteIndex = inputStream.read(buffer)) != -1) {
             fs.write(buffer, 0, byteIndex);
         }
+        fs.close();
     }
 
 }
