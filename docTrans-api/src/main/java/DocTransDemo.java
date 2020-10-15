@@ -14,10 +14,6 @@ import java.util.Map;
 public class DocTransDemo {
 
     private static Logger logger = Logger.getLogger(DocTransDemo.class);
-    //USER_NAME请前往www.tmxmall.com注册
-    public static String USER_NAME = "";
-    //注册成功后，可以在www.tmxmall.com/user/center查看
-    public static String CLIENT_ID = "";
     //待翻译的源文件
     public static String DOWNLOAD_FILE_PATH_NAME = "C:\\Users\\user\\Desktop\\tmp\\dockTrans\\result.docx";
     //翻译后的文件保存目录
@@ -44,10 +40,8 @@ public class DocTransDemo {
         Map<String, String> params = new HashMap<String, String>();
         // 按接口要求传递参数
         File file = new File(UPLOAD_FILE_PATH_NAME);
-        params.put("user_name", USER_NAME);
-        params.put("client_id", CLIENT_ID);
         params.put("from", "zh-CN");
-        params.put("to", "en-US");
+        params.put("to", "ja-JP");
         String response = HttpClientUtil.uploadFileByPost(url, file.getAbsolutePath(),
                 "file_api_trans", params, 5 * 10000);
         Map<String, Object> parseResult = JacksonUtil.readValue(response, new TypeReference<Map<String, Object>>(){});
@@ -60,8 +54,6 @@ public class DocTransDemo {
         // params用于存储要请求的参数
         Map<String, String> params = new HashMap<String, String>();
         // 接口要求传递参数
-        params.put("user_name", USER_NAME);
-        params.put("client_id", CLIENT_ID);
         params.put("doc_id", docId);
         params.put("is_ie", "false");
         InputStream inputStream = HttpClientUtil.doGetInputStream(url, params);
@@ -77,8 +69,6 @@ public class DocTransDemo {
         // params用于存储要请求的参数
         Map<String, String> params = new HashMap<String, String>();
         // 接口要求传递参数：用户Tmxmall邮箱账号，用户clientId，调用方，选择的引擎，领域（非必填）
-        params.put("user_name", USER_NAME);
-        params.put("client_id", CLIENT_ID);
         params.put("doc_id", docId);
         String result = HttpClientUtil.doGetStr(url, params);
         Map<String, Object> parseResult = JacksonUtil.readValue(result, new TypeReference<Map<String, Object>>(){});
