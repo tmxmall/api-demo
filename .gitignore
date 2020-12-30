@@ -1,2 +1,4 @@
 ﻿file-api/target
 docTrans-api/target
+*.class
+mt-api/target/*
