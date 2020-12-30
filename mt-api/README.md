@@ -48,7 +48,7 @@ http://api.tmxmall.com/v1/http/setmtprovider?mt_provider=XXXX&mt_field=ecomerce&
 ## 翻译调用接口URL
 
 ```
-http://api.tmxmall.com/v1/http/mttranslate?text=XXXX&user_name=XXX&client_id=d0c78b242894a032cb8c3aa7483284b4&from=zh-CN&to=en-US&de=trados
+http://api.tmxmall.com/v3/http/mttranslate?text=XXXX&user_name=XXX&from=zh-CN&to=en-US&sign=xxx&mtPeovider=Baidu
 ```
 
 输入参数:
@@ -56,11 +56,13 @@ http://api.tmxmall.com/v1/http/mttranslate?text=XXXX&user_name=XXX&client_id=d0c
 | 参数名称 | 说明 | 参数类型 | 是否为空 |
 | :---: | :---: | :---: | :---: |
 | user\_name | 用户Tmxmall邮箱账号 | 字符 | N |
-| client\_id | 用户clientId | 字符 | N |
-| de | 调用方 | 字符 | N |
+| sign | 签名 | 字符 | N |
+| mtPeovider | 翻译引擎 | 字符 | N |
 | text | 检索内容 | 字符 | N |
 | from | 源语言 | 字符 | N |
 | to | 目标语言 | 字符 | N |
+
+> 说明：签名要通过此方式生成：String sign = DigestUtils.md5Hex(user_name + from + text + to + clientId);
 
 语言列表：
 
