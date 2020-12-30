@@ -30,12 +30,12 @@ public class MtDemo {
         String to = MtApiUrlConstant.TO;
         String text = MtApiUrlConstant.TEXT;
         String clientId = MtApiUrlConstant.CLIENT_ID;
-        String mtPeovider = MtApiUrlConstant.MT_PEOVIDER;
+        String mtProvider = MtApiUrlConstant.MT_PEOVIDER;
         String username = MtApiUrlConstant.USERNAME;
 
         //翻译接口地址
 		String mtTransUrl = MtApiUrlConstant.MT_TRANSLATE;
-		mtTranslate(mtTransUrl,from,to,text,username,mtPeovider,clientId);
+		mtTranslate(mtTransUrl,from,to,text,username,mtProvider,clientId);
 		
 	}
 	
