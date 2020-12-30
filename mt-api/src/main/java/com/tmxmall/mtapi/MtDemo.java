@@ -12,6 +12,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 
 import com.tmxmall.mtapi.constants.MtApiUrlConstant;
@@ -24,15 +25,17 @@ public class MtDemo {
 	private static Logger logger = Logger.getLogger(MtDemo.class);
 	public static void main(String[] args) {
 		
-		//用户ClientId验证接口
-		String testCidUrl = MtApiUrlConstant.CLIENTID_VERIFY;
-		testClientId(testCidUrl);
-		//设置机器引擎接口地址
-		String setmturl = MtApiUrlConstant.SET_MTPROVIDER;
-		setMtProvider(setmturl);
-		//翻译接口地址
+		//传参
+        String from = MtApiUrlConstant.FROM;
+        String to = MtApiUrlConstant.TO;
+        String text = MtApiUrlConstant.TEXT;
+        String clientId = MtApiUrlConstant.CLIENT_ID;
+        String mtPeovider = MtApiUrlConstant.MT_PEOVIDER;
+        String username = MtApiUrlConstant.USERNAME;
+
+        //翻译接口地址
 		String mtTransUrl = MtApiUrlConstant.MT_TRANSLATE;
-		mtTranslate(mtTransUrl);
+		mtTranslate(mtTransUrl,from,to,text,username,mtPeovider,clientId);
 		
 	}
 	
@@ -55,16 +58,18 @@ public class MtDemo {
 	 *调用翻译接口
 	 * @param url
 	 */
-	public static void mtTranslate(String url) {
+	public static void mtTranslate(String url,String from,String to, String text,String username,String mtPeovider,String clientId) {
 		//params用于存储要请求的参数
 		Map<String, String> params = new HashMap<String, String>();
+		//封装签名
+        String sign = DigestUtils.md5Hex(username + from + text + to + clientId);
 		//按接口要求传递参数
-		params.put("user_name", "");
-		params.put("client_id", "");
-		params.put("de", "");
-		params.put("text", "");
-		params.put("from", "");
-		params.put("to", "");
+		params.put("user_name", username);
+		params.put("mtProvider", mtPeovider);
+		params.put("text", text);
+		params.put("from", from);
+		params.put("to", to);
+		params.put("sign", sign);
 		String result = urlConnection(url, params);
 		logger.info("---调用翻译接口---"+result);
 		
