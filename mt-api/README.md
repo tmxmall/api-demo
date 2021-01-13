@@ -11,7 +11,7 @@
 ## 接口URL
 
 ```
-http://api.tmxmall.com/v3/http/mttranslate?text=XXXX&user_name=XXX&from=zh-CN&to=en-US&sign=xxx&mtPeovider=Baidu
+http://api.tmxmall.com/v3/http/mttranslate?text=XXXX&user_name=XXX&from=zh-CN&to=en-US&sign=xxx&provider=Baidu
 ```
 
 输入参数:
@@ -20,13 +20,17 @@ http://api.tmxmall.com/v3/http/mttranslate?text=XXXX&user_name=XXX&from=zh-CN&to
 | :---: | :---: | :---: | :---: |
 | user\_name | 用户Tmxmall邮箱账号 | 字符 | N |
 | sign | 签名 | 字符 | N |
-| mtPeovider | 翻译引擎 | 字符 | N |
+| provider | 翻译引擎 | 字符 | N |
 | text | 检索内容 | 字符 | N |
 | from | 源语言 | 字符 | N |
 | to | 目标语言 | 字符 | N |
 
-> 说明：1.签名要通过此方式生成：String sign = DigestUtils.md5Hex(user_name + from + text + to + clientId);
+> 说明：
+
+> 1.签名要通过此方式生成：String sign = DigestUtils.md5Hex(user_name + from + text + to + clientId);
+
 > 2.client\_id即为tmxmall的API Key，client\_id需要登录到Tmxmall网站个人中心查看。
+
 语言列表：
 
 | 语言简写 | 名称 |
