@@ -6,46 +6,9 @@
 
 ![](/assets/mt-banner.png)
 
-# API接口
+# 机器翻译接口
 
-## 引擎选择接口URL
-
-```
-http://api.tmxmall.com/v1/http/setmtprovider?mt_provider=XXXX&mt_field=ecomerce&user_name=XXX&client_id=d0c78b242894a032cb8c3aa7483284b4&de=trados
-```
-
-输入参数:
-
-| 参数名称 | 说明 | 参数类型 | 是否为空 |
-| :---: | :---: | :---: | :---: |
-| user\_name | 用户Tmxmall邮箱账号 | 字符 | N |
-| client\_id | 用户clientId | 字符 | N |
-| de | 调用方 | 字符 | Y |
-| mt\_provider | 选择的引擎 | 字符 | N |
-| mt\_filed | 领域 | 字符 | Y |
-
-返回参数:
-
-| 参数名称 | 含义 | 说明 |
-| :---: | :---: | :---: |
-| error\_code | 错误码 | 错误码，0表示正常返回，如果使用不当或者系统出错会返回TB打头的错误码 |
-| error\_msg | 错误提示信息 | 错误提示信息 |
-
-可选引擎列表和垂直领域:
-
-| 引擎的名称 | 输入参数 | 支持的领域 | 输入参数 | 支持的语种 |
-| :---: | :---: | :---: | :---: | :---: |
-| 谷歌 | Google | 通用 | general | 支持中文（简/繁）、英语、俄语、阿拉伯语、法语、德语、菲律宾语、柬埔寨语、老挝语、韩语、马来语、印尼语、缅甸语、西班牙语、越南语、希腊语、日语、葡萄牙语、意大利语、泰语任意语言双向互译。 |
-| 腾讯翻译君 | Fanyijun | 通用 | general | 支持中-英、中-日、中-韩、中-法、中-西、中-德、中-俄、中-葡、中-越、中-印尼、中-泰、中-马来、英-法、英-西、英-德、英-俄、英-葡、英-越、英-印尼、英-泰、英-马来、法-西、法-德、法-俄、法-葡、西-德、西-俄、西-葡、德-俄、德-葡、俄-葡双向互译。 |
-| 阿里翻译 | AliTrans | 通用、电商 | general, ecommerce | 通用领域支持中-英双向互译，电商领域支持中文简体、英文、俄语、葡萄牙语、西班牙语、法语任意语言双向互译。 |
-| 百度翻译 | Baidu | 通用 | general | 支持中文（简/繁）、英文、阿拉伯语、德语、俄语、法语、韩语、葡萄牙语、日语、泰语、西班牙语、希腊语、越南语任意语言双向互译。 |
-| 有道翻译 | Youdao | 通用 | general | 支持中-英、中-日、中-韩、中-法、中-俄、中-西、中-葡双向互译。 |
-| 搜狗翻译 | Sogou | 通用 | general | 支持中文（简/繁）、英文、阿拉伯语、德语、俄语、法语、菲律宾语、韩语、马来语、葡萄牙语、日语、泰语、西班牙语、希腊语、印尼语、越南语任意语言双向互译。 |
-| 小牛翻译 | NiuTrans | 通用 | general | 支持中-英、中-日、中-韩、中-泰双向互译。 |
-| 新译 | NewTrans | 机械工程，金融财经，新闻传媒，法律合同，旅游口语，知识产权，IT通讯，生物医学 | engine，finance，news，laws，spoken，patent，it，medicine | 支持中英互译 |
-| | | | | |
-
-## 翻译调用接口URL
+## 接口URL
 
 ```
 http://api.tmxmall.com/v3/http/mttranslate?text=XXXX&user_name=XXX&from=zh-CN&to=en-US&sign=xxx&mtPeovider=Baidu
@@ -62,8 +25,8 @@ http://api.tmxmall.com/v3/http/mttranslate?text=XXXX&user_name=XXX&from=zh-CN&to
 | from | 源语言 | 字符 | N |
 | to | 目标语言 | 字符 | N |
 
-> 说明：签名要通过此方式生成：String sign = DigestUtils.md5Hex(user_name + from + text + to + clientId);
-
+> 说明：1.签名要通过此方式生成：String sign = DigestUtils.md5Hex(user_name + from + text + to + clientId);
+> 2.client\_id即为tmxmall的API Key，client\_id需要登录到Tmxmall网站个人中心查看。
 语言列表：
 
 | 语言简写 | 名称 |
@@ -118,7 +81,6 @@ http://api.tmxmall.com/v3/http/mttranslate?text=XXXX&user_name=XXX&from=zh-CN&to
 | et-EE | 爱沙尼亚语 |
 | lt-LT | 立陶宛语 |
 
-> 说明：client\_id即为tmxmall的API Key，client\_id需要登录到Tmxmall网站个人中心查看。
 
 返回参数:
 
@@ -157,52 +119,7 @@ http://api.tmxmall.com/v3/http/mttranslate?text=XXXX&user_name=XXX&from=zh-CN&to
 
 验证接口超时时间为5秒，5秒无信息返回，可认为是Tmxmall网站超时或者是网络超时。
 
-# 用户ClientId验证接口
 
-机器翻译api集成商在用户设置账号的时候需要验证账号信息是否正确。验证接口如下：
-
-### 接口URL
-
-`http://api.tmxmall.com/v1/http/clientIdVerify?user_name=XXXX&client_id=12334455&de=trados`
-
-> get请求，无需用户登录
-
-### 输入参数
-
-| 参数名称 | 说明 | 参数类型 | 是否为空 |
-| :---: | :---: | :---: | :---: |
-| user\_name | 用户Tmxmall邮箱账号 | 字符 | N |
-| client\_id | 用户clientId | 字符 | N |
-| de | 调用方 | 字符 | N |
-
-> 说明：client\_id即为tmxmall的API Key，client\_id需要登录到Tmxmall网站个人中心查看。
-
-### 返回参数
-
-| 参数名称 | 说明 | 参数类型 | 是否为空 |
-| :---: | :---: | :---: | :---: |
-| error\_code | 错误码 | 字符 | N |
-| error\_msg | 错误信息 | 字符 | N |
-
-> 返回数据为json格式，示例如下：
->
-> 成功：{"error\_code":"0","error\_msg":"成功"}
->
-> 失败：{"error\_code":"1","error\_msg":"系统异常"}
-
-### 错误码说明
-
-目前可能出现的错误码：
-
-| 错误码 | 错误说明 |
-| :--- | :--- |
-| TB01002 | 系统错误 |
-| TB01001 | 参数不合法\(包括clientId不匹配\) |
-| TB01021 | 用户名不存在 |
-
-### 其他异常情况
-
-验证接口超时时间为5秒，5秒无信息返回，软件可认为是Tmxmall网站超时或者是网络超时。
 
 
 
