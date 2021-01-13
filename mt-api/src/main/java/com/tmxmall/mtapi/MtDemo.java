@@ -2,7 +2,6 @@ package com.tmxmall.mtapi;
 
 import com.tmxmall.mtapi.constants.MtApiUrlConstant;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import java.io.*;
@@ -51,18 +50,6 @@ public class MtDemo {
 		logger.info("---调用用户ClientId验证接口---"+result);
 	}
 
-	public static String clearCATTagString(String args, boolean replaceNull) {
-		if (StringUtils.isEmpty(args)) {
-			return "";
-		} else {
-			args = args.replaceAll("<[^<>]*>", "");
-			if (replaceNull) {
-				args = args.replaceAll("\\s*|\t|\r|\n", "");
-			}
-
-			return args;
-		}
-	}
 	/**
 	 *调用翻译接口
 	 * @param url
@@ -70,8 +57,6 @@ public class MtDemo {
 	public static void mtTranslate(String url,String from,String to, String text,String username,String provider,String clientId) {
 		//params用于存储要请求的参数
 		Map<String, String> params = new HashMap<String, String>();
-
-		text = clearCATTagString(text,false);
 		//封装签名
         String sign = DigestUtils.md5Hex(username + from + text + to + clientId);
 		//按接口要求传递参数
@@ -81,7 +66,6 @@ public class MtDemo {
 		params.put("from", from);
 		params.put("to", to);
 		params.put("sign",sign);
-		System.out.println("==="+sign);
 		String result = urlConnection(url, params);
 		logger.info("---调用翻译接口---"+result);
 		
