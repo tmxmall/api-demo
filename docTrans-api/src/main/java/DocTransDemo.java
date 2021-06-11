@@ -19,9 +19,9 @@ public class DocTransDemo {
     //注册完成后，请进入个人中心查看CLIENT_ID(也就是API_KEY) https://www.tmxmall.com/user/center
     private static String CLIENT_ID = "";
     //待翻译的源文件
-    public static String DOWNLOAD_FILE_PATH_NAME = "C:\\Users\\ChenJian\\Desktop\\misc\\1111.out.docx";
+    public static String DOWNLOAD_FILE_PATH_NAME = "C:\\Users\\XXX\\Desktop\\misc\\demo.out.docx";
     //翻译后的文件保存目录
-    public static String UPLOAD_FILE_PATH_NAME = "C:\\Users\\ChenJian\\Desktop\\misc\\1111.docx";
+    public static String UPLOAD_FILE_PATH_NAME = "C:\\Users\\XXX\\Desktop\\misc\\demo.docx";
     public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
 
         //文件上传
@@ -34,6 +34,7 @@ public class DocTransDemo {
             System.out.println("[tranlation progress]" + percent);
             Thread.sleep(1*1000);
         }
+        Thread.sleep(5*1000);
         //文件下载
         String downloadUrl = DocTransUrlConstants.download;
         downloadFile(downloadUrl, docId);
