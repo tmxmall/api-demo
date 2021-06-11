@@ -1,7 +1,7 @@
 package com.tmxmall.docTrans;
 
 public class DocTransUrlConstants {
-    private static String[] hosts = new String[]{"http://tmxmall.ngrok.tmxmall.com"};  // 配置请求的host
+    private static String[] hosts = new String[]{"https://www.tmxmall.com"};  // 配置请求的host
 
     private static String serverName = hosts[0];
 

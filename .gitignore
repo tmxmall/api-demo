@@ -2,3 +2,4 @@
 docTrans-api/target
 *.class
 mt-api/target/*
+docTrans-api/docTrans.iml
